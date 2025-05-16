@@ -1,0 +1,26 @@
+config:
+  payload:
+    - path: "../mock_data/vusers.csv"
+      fields:
+        - "name"
+        - "email"
+        - "password"
+      skipHeader: true
+      loadAll: true
+      name: auth
+    - path: "../mock_data/transactions.csv"
+      fields:
+        - "amount"
+        - "date"
+        - "placeId"
+      skipHeader: true
+  environments:
+    development:
+      target: http://localhost:3000/api
+      phases:
+        - duration: 120
+          arrivalRate: 5
+          name: Soak test.
+  plugins:
+    apdex: {}
+    fake-data: {}
